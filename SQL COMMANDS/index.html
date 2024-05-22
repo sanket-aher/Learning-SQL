@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Commands</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Structure Query Language(SQL)</h1><br>
+
+    <h3>What is Database?</h3>
+    <p>It is a collection of data in a format that can be easily accessed.</p>
+    <br>
+
+    <h3>Why Database?</h3>
+    <p>1)Can store large data.<br>
+       2)Features like security,scalability,etc.<br>
+       3)Easier to insert,update or delete data.
+    </p>
+    <br>
+
+    <h3>Difference between SQL vs NoSQL?</h3>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>SQL</th>
+                <th>NoSQL</th>
+            </tr>
+            <tr>
+                <td>1)Relational Database(data stored in tables).</td>
+                <td>1)Non Relational Database(data stored in document/key-val/graphs,etc).</td>
+            </tr>
+            <tr>
+                <td>ex MySQL,Oracle,PostgreSQL,etc</td>
+                <td>ex MongoDB,Cassandra,Neo4j,etc</td>
+            </tr>
+        </table><br>
+
+    <h3>SQL(Structure Query Language)</h3>
+    <p>SQL is a programming language used to interact with relational databases.<br>
+       It allows user to store,manipulate and retrieve data efficiently in databases like MySQL,Oracle,etc.<br>
+       MySQL is a relational database program that uses SQL Queries.
+    </p><br>
+
+    <h3>CREATE DATABASE :</h3>
+    <p>
+       To creates a new database.<br>
+        <b>Syntax :</b> CREATE DATABSE databasename;<br>
+       To use database.<br>
+        <b>Syntax :</b>USE databasename;<br>
+       To Delete/Drop database.<br>
+        <b>Syntax :</b>DROP DATABASE databasename;<br><br>
+        
+        <!-- Ex1  -->
+        &nbsp;<b>Ex1</b> <br>
+        &nbsp;&nbsp;CREATE DATABASE college;<br>
+        &nbsp;&nbsp;CREATE DATABASE xyz;<br>
+        &nbsp;&nbsp;DROP DATABASE xyz;<br>
+        &nbsp;&nbsp;USE college;<br>
+    </p><br>
+
+    <h3>Database Queries</h3>
+    <p>
+        1)CREATE DATABASE db_name;<br> <b>OR</b>
+        &nbsp;CREATE DATABASE IF NOT EXISTS db_name;<br>
+        2)DROP DATABASE db_name;<br> <b>OR</b>
+        &nbsp;DROP DATABASE IF EXISTS db_name;<br>
+        3)SHOW DATABASES;<br>
+        4)SHOW TABLES;<br><br>
+
+        <!-- Ex2  -->
+        &nbsp;<b>Ex2</b> <br>
+        &nbsp;&nbsp;CREATE DATABASE stud;<br>
+        &nbsp;&nbsp;CREATE DATABASE IF NOT EXISTS instagram;<br>
+        &nbsp;&nbsp;DROP DATABASE IF EXISTS stud;<br>
+        &nbsp;&nbsp;SHOW DATABASES; (o/p=> instagram) <br>
+        &nbsp;&nbsp;USE instagram;<br>        
+        &nbsp;&nbsp;SHOW TABLES; (o/p=> should be empty)  <br>
+    </p>
+    <br>
+
+    <h3>Table Queries</h3>
+    <p>1)Create 2)Insert 3)Update 4)Delete 5)Alter 6)Truncate 7)Drop</p><br>
+
+    <h3>1)CREATE TABLE :</h3>
+    <p>
+        The CREATE TABLE statement is used to create a new table in a database.<br>
+        <b>Syntax :</b>CREATE TABLE table_name (
+            columnname1 datatype constraints,
+            columnname2 datatype constraints,
+            columnname3 datatype constraints,
+           ....
+        );<br>
+        - The columnname parameters specify the names of the columns of the table.<br>
+        - The datatype parameter specifies the type of data the column can hold (e.g. varchar, integer, date, etc.).<br><br>
+        
+        <!-- Ex3  -->
+        &nbsp;<b>Ex3</b> <br>
+        &nbsp;&nbsp;CREATE DATABASE instagram;<br>
+        &nbsp;&nbsp;USE instagram;<br>
+        &nbsp;&nbsp;CREATE TABLE user(id INT,name VARCHAR(30),email VARCHAR(50),followers INT,following INT);<br><br>
+
+        - The constraints are used to specify rules for the data in the table.
+    </p><br>
+
+    <h3>Difference between CHAR and VARCHAR Datatype?</h3>
+    <p>
+        1)CHAR has a fixed size ex CHAR(10) =>In memory [j][o][h][n][ ][ ][ ][ ][ ][ ].<br>
+        2)VARCAHR has a variable size ex VARCAHR(10) =>In memory [j][o][h][n].
+    </p><br>
+
+    <h3>Constraints</h3>
+    <p>
+        The constraints are used to specify rules for the data in the table.<br><br>
+        &nbsp;&nbsp;The following constraints are commonly used in SQL<br>
+        &nbsp;&nbsp;<b>1)NOT NULL :</b> columns cannot have a null value.<br>
+        &nbsp;&nbsp;<b>2)UNIQUE :</b> all values in column are different.<br>
+        &nbsp;&nbsp;<b>3)DEFAULT :</b> set the default value of a column.<br>
+        &nbsp;&nbsp;<b>4)CHECK :</b> it can limit the values allowed in a column.<br><br>
+
+        <!-- Ex4  -->
+        &nbsp;<b>Ex4</b> <br>
+        &nbsp;&nbsp;CREATE DATABASE instagram;<br>
+        &nbsp;&nbsp;USE instagram;<br>
+        &nbsp;&nbsp;CREATE TABLE user(id INT,age INT,name VARCHAR(30) NOT NULL,email VARCHAR(50) UNIQUE,followers INT DEFAULT 0,following INT,CONSTRAINTS CHECK (age>=13));<br><br>
+
+        &nbsp;&nbsp;<b>5)PRIMARY KEY :</b><br>
+        &nbsp;&nbsp;Def1 : it can limit the values allowed in a column.<br>
+        &nbsp;&nbsp;Def2 : It is column in a table that uniquely identifies each row(a unique id).There is only 1 Primary Key(PK) and it should not be NULL<br>
+        &nbsp;&nbsp;<b>Syntax : </b> CREATE TABLE tablename( column_name1 datatype PRIMARY KEY, column_name2 datatype);  <br><br>
+
+        &nbsp;&nbsp;<b>5)FOREIGN KEY :</b><br>
+        &nbsp;&nbsp;A foreign key is a column(or set of columns) in table that refers to the primary key in another table<br>
+        &nbsp;&nbsp;A Foreign keys(FKs) can have duplicate and null values<br>
+        &nbsp;&nbsp;There can be multiple Foreign Keys.<br>
+        &nbsp;&nbsp;<b>Syntax : </b> CREATE TABLE tablename( column_name1 datatype, FOREIGN KEY (column_name1) references tablename2(id));  <br><br>
+
+        <!-- Ex5  -->
+        &nbsp;<b>Ex5</b> <br>
+        &nbsp;&nbsp;CREATE DATABASE instagram;<br>
+        &nbsp;&nbsp;USE instagram;<br>
+        &nbsp;&nbsp;CREATE TABLE user(id INT PRIMARY KEY,age INT,name VARCHAR(30) NOT NULL,email VARCHAR(50) UNIQUE,followers INT DEFAULT 0,following INT,CONSTRAINTS CHECK (age>=13));<br>
+        &nbsp;&nbsp;CREATE TABLE post(id INT PRIMARY KEY,content VARCHAR(100),user_id INT,FOREIGN KEY (user_id) REFERENCES user(id));
+    </p><br>
+
+    <h3>2)INSERT INTO :</h3>
+    <p>
+        The INSERT INTO statement is used to insert new records in a table.<br>
+        <b>Syntax :</b>INSERT INTO table_name (column1, column2, column3, ...)
+        VALUES (value1, value2, value3, ...);<br><br>
+
+        <!-- Ex6  -->
+        &nbsp;<b>Ex6</b> <br>
+        &nbsp;&nbsp;CREATE DATABASE instagram;<br>
+        &nbsp;&nbsp;USE instagram;<br>
+        &nbsp;&nbsp;CREATE TABLE user(id INT PRIMARY KEY,age INT,name VARCHAR(30) NOT NULL,email VARCHAR(50) UNIQUE,followers INT DEFAULT 0,following INT,CONSTRAINTS CHECK (age>=13));<br>
+        &nbsp;&nbsp;INSERT INTO user (id,age,name,email,followers,following) VALUES (1,14,"adam","adam@yahoo.in",123,145),(2,15,"bob","bob@gmail.com",200,200),(3,16,"casey","casey@gmail.com",300,306);
+    </p>
+
+    <h3>Select Commands :</h3>
+
+    <h3>1]SELECT</h3>
+    <p>
+        The SELECT statement is used to select data from a database.<br>
+        <b>Syntax 1 :</b> SELECT col1,col2,.. FROM table_name; <br>
+        <b>Syntax 2 :</b> SELECT * FROM table_name; <br><br>
+
+        <!-- Ex7  -->
+        &nbsp;<b>Ex7</b> <br>
+        &nbsp;&nbsp;CREATE DATABASE instagram;<br>
+        &nbsp;&nbsp;USE instagram;<br>
+        &nbsp;&nbsp;CREATE TABLE user(id INT PRIMARY KEY,age INT,name VARCHAR(30) NOT NULL,email VARCHAR(50) UNIQUE,followers INT DEFAULT 0,following INT,CONSTRAINTS CHECK (age>=13));<br>
+        &nbsp;&nbsp;INSERT INTO user (id,age,name,email,followers,following) VALUES (1,14,"adam","adam@yahoo.in",123,145),(2,15,"bob","bob@gmail.com",200,200),(3,16,"casey","casey@gmail.com",300,306);<br><br>
+        &nbsp;&nbsp;Select id,name,age from user;<br>
+
+        output=>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>age</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>adam</td>
+                <td>14</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>bob</td>
+                <td>15</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>casey</td>
+                <td>16</td>
+            </tr>
+        </table><br>
+
+        &nbsp;&nbsp;Select * from user;<br>
+
+        output=>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>id</th>
+                <th>age</th>
+                <th>name</th>
+                <th>email</th>
+                <th>followers</th>
+                <th>following</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>14</td>
+                <td>adam</td>
+                <td>adam@yahoo.in</td>
+                <td>123</td>
+                <td>145</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>15</td>
+                <td>bob</td>
+                <td>bob@gmail.com</td>
+                <td>200</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>16</td>
+                <td>casey</td>
+                <td>casey@email.com</td>
+                <td>300</td>
+                <td>306</td>
+            </tr>
+        </table><br>      
+    </p>
+
+    <h3>2]Select Distinct</h3>
+    <p>
+        The SELECT DISTINCT statement is used to return only distinct (different) values. <br>
+        <b>Syntax :</b> SELECT DISTINCT col1,col2 FROM table_name; <br><br>
+
+        <!-- Ex8  -->
+        &nbsp;<b>Ex8</b> <br>
+        &nbsp;&nbsp;CREATE DATABASE instagram;<br>
+        &nbsp;&nbsp;USE instagram;<br>
+        &nbsp;&nbsp;CREATE TABLE user(id INT PRIMARY KEY,age INT,name VARCHAR(30) NOT NULL,email VARCHAR(50) UNIQUE,followers INT DEFAULT 0,following INT,CONSTRAINTS CHECK (age>=13));<br>
+        &nbsp;&nbsp;INSERT INTO user (id,age,name,email,followers,following) VALUES (1,14,"adam","adam@yahoo.in",123,145),(2,15,"bob","bob@gmail.com",200,200),(3,16,"casey","casey@gmail.com",300,306),(4,15,"adam","adam@gmail.com",500,600),(5,16,"casey","c@gmail.com",700,806);<br><br>
+        &nbsp;&nbsp;Select distict age from user;<br>
+
+        output=>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>age</th>
+            </tr>
+            <tr>
+                <td>14</td>
+            </tr>
+            <tr>
+                <td>15</td>
+            </tr>
+            <tr>
+                <td>16</td>
+            </tr>
+        </table><br>
+
+        &nbsp;&nbsp;Select distict age,name from user;<br>
+
+        output=>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>age</th>
+                <th>name</th>
+            </tr>
+            <tr>
+                <td>14</td>
+                <td>adam</td>
+            </tr>
+            <tr>
+                <td>15</td>
+                <td>bob</td>
+            </tr>
+            <tr>
+                <td>16</td>
+                <td>casey</td>
+            </tr>
+            <tr>
+                <td>15</td>
+                <td>adam</td>
+            </tr>
+        </table><br>
+    </p>
+
+    <h3>2]WHERE Clause</h3>
+    <p>
+        The WHERE clause is used to filter records. <br>
+        <b>Syntax :</b> SELECT  col1,col2 FROM table_name WHERE conditions; <br><br>
+
+        <b>Where Clause Operators:</b><br>
+        <b>1)Arithmetic Operators : </b>+,-,*,/,% <br>
+        <b>2)Comparison Operators : </b>=,!=,>,>=,<,<= <br>
+        <b>3)Logical Operators : </b>AND,OR,NOT,IN,BETWEEN,ALL,LIKE,ANY<br>
+        <b>4)Bitwise Operators : </b>&(Bitwise AND),|(Bitwise OR)<br><br>
+
+        <!-- Ex9  -->
+        &nbsp;<b>Ex9</b> <br>
+        &nbsp;&nbsp;CREATE DATABASE instagram;<br>
+        &nbsp;&nbsp;USE instagram;<br>
+        &nbsp;&nbsp;CREATE TABLE user(id INT PRIMARY KEY,age INT,name VARCHAR(30) NOT NULL,email VARCHAR(50) UNIQUE,followers INT DEFAULT 0,following INT,CONSTRAINTS CHECK (age>=13));<br>
+        &nbsp;&nbsp;INSERT INTO user (id,age,name,email,followers,following) VALUES (1,14,"adam","adam@yahoo.in",123,145),(2,15,"bob","bob@gmail.com",200,200),(3,16,"casey","casey@gmail.com",300,306),(4,17,"donald","donald@gmail.com",200,105);<br><br>
+ 
+        &nbsp;&nbsp;Select * from user where followers>=200;<br>
+
+        output=>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>id</th>
+                <th>age</th>
+                <th>name</th>
+                <th>email</th>
+                <th>followers</th>
+                <th>following</th>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>15</td>
+                <td>bob</td>
+                <td>bob@gmail.com</td>
+                <td>200</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>16</td>
+                <td>casey</td>
+                <td>casey@email.com</td>
+                <td>300</td>
+                <td>306</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>17</td>
+                <td>donald</td>
+                <td>donald@gmail.com</td>
+                <td>200</td>
+                <td>105</td>
+            </tr>
+        </table><br>
+
+        &nbsp;&nbsp;Select age,name from user where age+1=18;<br>
+
+        output=>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>age</th>
+                <th>name</th>
+            </tr>
+            <tr>
+                <td>17</td>
+                <td>donald</td>
+            </tr>
+        </table><br>
+
+        <b>Frequently used operators :</b><br>
+        <b>1)AND</b>(to check for both/all conditions to be true)<br>
+        <b>2)OR</b>(to check for one of the conditions to be true)<br>
+        <b>3)BETWEEN</b>(select for a given range)<br>
+        <b>4)IN</b>(matches any value in the list)<br>
+        <b>5)NOT</b>(to neglate the given condition)<br><br>
+
+        <!-- Ex10 -->
+        &nbsp;<b>Ex10</b> <br>
+        &nbsp;&nbsp;CREATE DATABASE instagram;<br>
+        &nbsp;&nbsp;USE instagram;<br>
+        &nbsp;&nbsp;CREATE TABLE user(id INT PRIMARY KEY,age INT,name VARCHAR(30) NOT NULL,email VARCHAR(50) UNIQUE,followers INT DEFAULT 0,following INT,CONSTRAINTS CHECK (age>=13));<br>
+        &nbsp;&nbsp;INSERT INTO user (id,age,name,email,followers,following) VALUES (1,14,"adam","adam@yahoo.in",123,145),(2,15,"bob","bob@gmail.com",200,200),(3,16,"casey","casey@gmail.com",300,306),(4,17,"donald","donald@gmail.com",200,105);(5,14,"eve","eve@yahoo.in",400,145),(6,16,"farah","farah@gmail.com",10000,1000);<br><br>
+ 
+        &nbsp;&nbsp;Select name,age,followers from user where age>15 and followers>200;<br>
+
+        output=>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>name</th>
+                <th>age</th>
+                <th>followers</th>
+            </tr>
+            <tr>
+                <td>casey</td>
+                <td>16</td>
+                <td>300</td>
+            </tr>
+            <tr>
+                <td>farah</td>
+                <td>16</td>
+                <td>10000</td>
+            </tr>
+        </table><br>
+
+        &nbsp;&nbsp;Select name,age,followers from user where age>15 or followers>200;<br>
+
+        output=>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>name</th>
+                <th>age</th>
+                <th>followers</th>
+            </tr>
+            <tr>
+                <td>casey</td>
+                <td>16</td>
+                <td>300</td>
+            </tr>
+            <tr>
+                <td>donald</td>
+                <td>17</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>eve</td>
+                <td>14</td>
+                <td>400</td>
+            </tr>
+            <tr>
+                <td>farah</td>
+                <td>16</td>
+                <td>10000</td>
+            </tr>
+        </table><br>
+
+        &nbsp;&nbsp;Select name,age,followers from user where age between 15 and 17;<br>
+
+        output=>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>name</th>
+                <th>age</th>
+                <th>followers</th>
+            </tr>
+            <tr>
+                <td>bob</td>
+                <td>15</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>casey</td>
+                <td>16</td>
+                <td>300</td>
+            </tr>
+            <tr>
+                <td>donald</td>
+                <td>17</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>farah</td>
+                <td>16</td>
+                <td>10000</td>
+            </tr>
+        </table><br>
+
+        &nbsp;&nbsp;Select name,age,followers,email from user where email in ("donald@gmail.com","bob@gmail.com","abc@gmail.com");<br>
+
+        output=>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>name</th>
+                <th>age</th>
+                <th>followers</th>
+                <th>email</th>
+            </tr>
+            <tr>
+                <td>bob</td>
+                <td>15</td>
+                <td>200</td>
+                <td>bob@gmail.com</td>
+            </tr>
+            <tr>
+                <td>donald</td>
+                <td>17</td>
+                <td>200</td>
+                <td>donald@gmail.com</td>
+            </tr>
+        </table><br>
+
+        &nbsp;&nbsp;Select name,age from user where age in (14,16);<br>
+
+        output=>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>name</th>
+                <th>age</th>
+            </tr>
+            <tr>
+                <td>adam</td>
+                <td>14</td>
+            </tr>
+            <tr>
+                <td>casey</td>
+                <td>16</td>
+            </tr>
+            <tr>
+                <td>eve</td>
+                <td>14</td>
+            </tr>
+            <tr>
+                <td>farah</td>
+                <td>16</td>
+            </tr>
+        </table><br>
+
+        &nbsp;&nbsp;Select name,age from user where age not in (14,16);<br>
+
+        output=>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>name</th>
+                <th>age</th>
+            </tr>
+            <tr>
+                <td>bob</td>
+                <td>15</td>
+            </tr>
+            <tr>
+                <td>donald</td>
+                <td>17</td>
+            </tr>
+        </table>
+    </p>
+
+    <h3>4]Limit Clause</h3>
+    <p>
+        Sets an upper limit on number of rows(tuples) to be returned. <br>
+        <b>Syntax 1:</b> SELECT  col1,col2 FROM table_name WHERE conditions Limit number; <br>
+        <b>Syntax 2:</b> SELECT  col1,col2 FROM table_name Limit number; <br><br>
+
+        <!-- Ex11 -->
+        &nbsp;<b>Ex11</b> <br>
+        &nbsp;&nbsp;CREATE DATABASE instagram;<br>
+        &nbsp;&nbsp;USE instagram;<br>
+        &nbsp;&nbsp;CREATE TABLE user(id INT PRIMARY KEY,age INT,name VARCHAR(30) NOT NULL,email VARCHAR(50) UNIQUE,followers INT DEFAULT 0,following INT,CONSTRAINTS CHECK (age>=13));<br>
+        &nbsp;&nbsp;INSERT INTO user (id,age,name,email,followers,following) VALUES (1,14,"adam","adam@yahoo.in",123,145),(2,15,"bob","bob@gmail.com",200,200),(3,16,"casey","casey@gmail.com",300,306),(4,17,"donald","donald@gmail.com",200,105);(5,14,"eve","eve@yahoo.in",400,145),(6,16,"farah","farah@gmail.com",10000,1000);<br><br>
+
+        &nbsp;&nbsp;Select name,age from user where age > 14;<br>
+
+        output=>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>name</th>
+                <th>age</th>
+            </tr>
+            <tr>
+                <td>bob</td>
+                <td>15</td>
+            </tr>
+            <tr>
+                <td>casey</td>
+                <td>16</td>
+            </tr>
+            <tr>
+                <td>donald</td>
+                <td>17</td>
+            </tr>
+            <tr>
+                <td>farah</td>
+                <td>16</td>
+            </tr>
+        </table><br>
+
+        &nbsp;&nbsp;Select name,age from user where age > 14 limit 2;<br>
+
+        output=>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>name</th>
+                <th>age</th>
+            </tr>
+            <tr>
+                <td>bob</td>
+                <td>15</td>
+            </tr>
+            <tr>
+                <td>casey</td>
+                <td>16</td>
+            </tr>
+        </table><br>
+
+        &nbsp;&nbsp;Select name,age from user limit 3;<br>
+
+        output=>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>name</th>
+                <th>age</th>
+            </tr>
+            <tr>
+                <td>adam</td>
+                <td>14</td>
+            </tr>
+            <tr>
+                <td>bob</td>
+                <td>15</td>
+            </tr>
+            <tr>
+                <td>casey</td>
+                <td>16</td>
+            </tr>
+        </table>
+    </p>
+
+    <h3>5]Order by Clause :</h3>
+    <p>
+        To sort the result in ascending (ASC) or descending(DESC) order. <br>
+        <b>Syntax :</b> SELECT  col1,col2 FROM table_name order by col_name(s) ASC|DESC; <br>
+
+        <!-- Ex12 -->
+        &nbsp;<b>Ex12</b> <br>
+        &nbsp;&nbsp;CREATE DATABASE instagram;<br>
+        &nbsp;&nbsp;USE instagram;<br>
+        &nbsp;&nbsp;CREATE TABLE user(id INT PRIMARY KEY,age INT,name VARCHAR(30) NOT NULL,email VARCHAR(50) UNIQUE,followers INT DEFAULT 0,following INT,CONSTRAINTS CHECK (age>=13));<br>
+        &nbsp;&nbsp;INSERT INTO user (id,age,name,email,followers,following) VALUES (1,14,"adam","adam@yahoo.in",123,145),(2,15,"bob","bob@gmail.com",200,200),(3,16,"casey","casey@gmail.com",300,306),(4,17,"donald","donald@gmail.com",200,105);(5,14,"eve","eve@yahoo.in",400,145),(6,16,"farah","farah@gmail.com",10000,1000);<br><br>
+
+        &nbsp;&nbsp;Select name,followers from user order by followers asc;<br>
+
+        output=>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>name</th>
+                <th>followers</th>
+            </tr>
+            <tr>
+                <td>adam</td>
+                <td>123</td>
+            </tr>
+            <tr>
+                <td>bob</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>donald</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>casey</td>
+                <td>300</td>
+            </tr>
+            <tr>
+                <td>eve</td>
+                <td>400</td>
+            </tr>
+            <tr>
+                <td>farah</td>
+                <td>10000</td>
+            </tr>
+        </table><br>
+
+        &nbsp;&nbsp;Select name,followers from user order by followers desc;<br>
+
+        output=>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>name</th>
+                <th>followers</th>
+            </tr>
+            <tr>
+                <td>farah</td>
+                <td>10000</td>
+            </tr>
+            <tr>
+                <td>eve</td>
+                <td>400</td>
+            </tr>
+            <tr>
+                <td>casey</td>
+                <td>300</td>
+            </tr>
+            <tr>
+                <td>donald</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>bob</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>adam</td>
+                <td>123</td>
+            </tr>
+        </table><br>
+
+        &nbsp;&nbsp;Select name,followers from user order by followers; (Bydefault ascending order if not mention)<br>
+
+        output=>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>name</th>
+                <th>followers</th>
+            </tr>
+            <tr>
+                <td>adam</td>
+                <td>123</td>
+            </tr>
+            <tr>
+                <td>bob</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>donald</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>casey</td>
+                <td>300</td>
+            </tr>
+            <tr>
+                <td>eve</td>
+                <td>400</td>
+            </tr>
+            <tr>
+                <td>farah</td>
+                <td>10000</td>
+            </tr>
+        </table>
+    </p><br>
+
+    <h3>6]Aggregate Functions :</h3>
+    <p>
+        An aggregate function is a function that performs a calculation on a set of values, and returns a single value. <br><br>
+        The most commonly used SQL aggregate functions : <br>
+        <b>i)COUNT() : </b>Returns the number of rows in a set. <br>
+        <b>ii)MAX() : </b>Returns the largest value within the selected column. <br>
+        <b>iii)MIN() : </b>Returns the smallest value within the selected column. <br>
+        <b>iv)SUM() : </b>Returns the total sum of a numerical column. <br>
+        <b>v)AVG() : </b>Returns the average value of a numerical column. <br>
+
+        <!-- Ex13 -->
+        &nbsp;<b>Ex13</b> <br>
+        &nbsp;&nbsp;CREATE DATABASE instagram;<br>
+        &nbsp;&nbsp;USE instagram;<br>
+        &nbsp;&nbsp;CREATE TABLE user(id INT PRIMARY KEY,age INT,name VARCHAR(30) NOT NULL,email VARCHAR(50) UNIQUE,followers INT DEFAULT 0,following INT,CONSTRAINTS CHECK (age>=13));<br>
+        &nbsp;&nbsp;INSERT INTO user (id,age,name,email,followers,following) VALUES (1,14,"adam","adam@yahoo.in",123,145),(2,15,"bob","bob@gmail.com",200,200),(3,16,"casey","casey@gmail.com",300,306),(4,17,"donald","donald@gmail.com",200,105);(5,14,"eve","eve@yahoo.in",400,145),(6,16,"farah","farah@gmail.com",10000,1000);<br><br>
+
+        &nbsp;&nbsp;Select max(followers) from user;<br>
+
+        output=>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>max(followers)</th>
+            </tr>
+            <tr>
+                <td>10000</td>
+            </tr>
+        </table><br>
+
+        &nbsp;&nbsp;Select count(age) from user where age=14;<br>
+
+        output=>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>count(age)</th>
+            </tr>
+            <tr>
+                <td>2</td>
+            </tr>
+        </table><br>
+
+        &nbsp;&nbsp;Select min(age) from user;<br>
+
+        output=>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>min(age)</th>
+            </tr>
+            <tr>
+                <td>14</td>
+            </tr>
+        </table><br>
+
+        &nbsp;&nbsp;Select avg(age) from user;<br>
+
+        output=>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>avg(age)</th>
+            </tr>
+            <tr>
+                <td>15.3333</td>
+            </tr>
+        </table><br>
+
+        &nbsp;&nbsp;Select sum(followers) from user;<br>
+
+        output=>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>sum(followers)</th>
+            </tr>
+            <tr>
+                <td>11223</td>
+            </tr>
+        </table>
+    </p>
+    
+    <h3>7]Group by Clause :</h3>
+    <p>
+        Groups rows that have the same values into summary rows. <br>
+        It collect data from multiple records and groups the result by one or more column. <br>
+        Generally we use group by with some Aggregate function. <br>
+        <b>Syntax :</b> SELECT  col1,col2 FROM table_name GROUP BY col_name(s); <br>
+
+        <!-- Ex14 -->
+        &nbsp;<b>Ex14</b> <br>
+        &nbsp;&nbsp;CREATE DATABASE instagram;<br>
+        &nbsp;&nbsp;USE instagram;<br>
+        &nbsp;&nbsp;CREATE TABLE user(id INT PRIMARY KEY,age INT,name VARCHAR(30) NOT NULL,email VARCHAR(50) UNIQUE,followers INT DEFAULT 0,following INT,CONSTRAINTS CHECK (age>=13));<br>
+        &nbsp;&nbsp;INSERT INTO user (id,age,name,email,followers,following) VALUES (1,14,"adam","adam@yahoo.in",123,145),(2,15,"bob","bob@gmail.com",200,200),(3,16,"casey","casey@gmail.com",300,306),(4,17,"donald","donald@gmail.com",200,105);(5,14,"eve","eve@yahoo.in",400,145),(6,16,"farah","farah@gmail.com",10000,1000);<br><br>
+
+        &nbsp;&nbsp;<b>Q1.Find the number of count in each age?</b><br>
+        &nbsp;&nbsp;Select age,count(id) from user group by age;<br>
+
+        output=>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>age</th>
+                <th>count(id)</th>
+            </tr>
+            <tr>
+                <td>14</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>15</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>16</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>17</td>
+                <td>1</td>
+            </tr>
+        </table><br>
+
+        &nbsp;&nbsp;<b>Q2.Find the maximum number of followers in each age?</b><br>
+        &nbsp;&nbsp;Select age,max(followers) from user group by age;<br>
+
+        output=>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>age</th>
+                <th>max(followers)</th>
+            </tr>
+            <tr>
+                <td>14</td>
+                <td>400</td>
+            </tr>
+            <tr>
+                <td>15</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>16</td>
+                <td>10000</td>
+            </tr>
+            <tr>
+                <td>17</td>
+                <td>200</td>
+            </tr>
+        </table>
+    </p>
+
+    <h3>8]Having Clause :</h3>
+    <p>
+        The Having Clause was added to SQL because the WHERE keyword cannot be used with GROUP BY clause.<br>
+        The Having Clause is similar to WHERE condition i.e applies some condition on rows.<br>
+        <b>Note : 1)WHERE is for the table,HAVING is for the GROUP BY.<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2)Grouping is necessary for HAVING.</b><br>
+        <b>Syntax :</b> SELECT  col1,col2 FROM table_name GROUP BY col_name(s) HAVING condition; <br>
+
+        <!-- Ex15 -->
+        &nbsp;<b>Ex15</b> <br>
+        &nbsp;&nbsp;CREATE DATABASE instagram;<br>
+        &nbsp;&nbsp;USE instagram;<br>
+        &nbsp;&nbsp;CREATE TABLE user(id INT PRIMARY KEY,age INT,name VARCHAR(30) NOT NULL,email VARCHAR(50) UNIQUE,followers INT DEFAULT 0,following INT,CONSTRAINTS CHECK (age>=13));<br>
+        &nbsp;&nbsp;INSERT INTO user (id,age,name,email,followers,following) VALUES (1,14,"adam","adam@yahoo.in",123,145),(2,15,"bob","bob@gmail.com",200,200),(3,16,"casey","casey@gmail.com",300,306),(4,17,"donald","donald@gmail.com",200,105);(5,14,"eve","eve@yahoo.in",400,145),(6,16,"farah","farah@gmail.com",10000,1000);<br><br>
+
+        &nbsp;&nbsp;<b>Q1.Find the maximum number of followers of each age having followers greater than 200?</b><br>
+        &nbsp;&nbsp;Select age,max(followers) from user group by age having max(followers)>200;<br>
+
+        output=>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>age</th>
+                <th>max(followers)</th>
+            </tr>
+            <tr>
+                <td>14</td>
+                <td>400</td>
+            </tr>
+            <tr>
+                <td>16</td>
+                <td>10000</td>
+            </tr>
+        </table><br>
+    </p>
+    
+    <p>
+        <h3>General Order :</h3>
+        Select column(s) <br>
+        from table_name <br>
+        where condition <br>
+        group by column(s) <br>
+        having condition <br>
+        order by column(s) ASC|DESC; <br>
+   
+        <!-- Ex16 -->
+        &nbsp;<b>Ex16</b> <br>
+        &nbsp;&nbsp;CREATE DATABASE instagram;<br>
+        &nbsp;&nbsp;USE instagram;<br>
+        &nbsp;&nbsp;CREATE TABLE user(id INT PRIMARY KEY,age INT,name VARCHAR(30) NOT NULL,email VARCHAR(50) UNIQUE,followers INT DEFAULT 0,following INT,CONSTRAINTS CHECK (age>=13));<br>
+        &nbsp;&nbsp;INSERT INTO user (id,age,name,email,followers,following) VALUES (1,14,"adam","adam@yahoo.in",123,145),(2,15,"bob","bob@gmail.com",200,200),(3,16,"casey","casey@gmail.com",300,306),(4,17,"donald","donald@gmail.com",200,105);(5,14,"eve","eve@yahoo.in",400,145),(6,16,"farah","farah@gmail.com",10000,1000);<br><br>
+
+        &nbsp;&nbsp;<b>Q1.Find the maximum number of followers of each age in descending order having followers greater than 200?</b><br>
+        &nbsp;&nbsp;Select age,max(followers) from user group by age having max(followers)>200 order by age desc;<br>
+
+        output=>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>age</th>
+                <th>max(followers)</th>
+            </tr>
+            <tr>
+                <td>16</td>
+                <td>10000</td>
+            </tr>
+            <tr>
+                <td>14</td>
+                <td>400</td>
+            </tr>
+        </table>
+    </p>
+
+    <h3>Table Queries</h3>
+    <h3>3)Update Table :</h3>
+    <p>
+        The UPDATE statement is used to modify the existing records in a table. <br>
+        <b>Syntax :</b> UPDATE table_name SET col1=val1,col2=val2 WHERE condition; <br>
+        <b>Note : ON SQL WORKBENCH for UPDATE command there will be errors sometimes so use before UPDATE command => SET SQL_SAFE_UPDATES =0; </b>
+
+        <!-- Ex17 -->
+        &nbsp;<b>Ex17</b> <br>
+        &nbsp;&nbsp;CREATE DATABASE instagram;<br>
+        &nbsp;&nbsp;USE instagram;<br>
+        &nbsp;&nbsp;CREATE TABLE user(id INT PRIMARY KEY,age INT,name VARCHAR(30) NOT NULL,email VARCHAR(50) UNIQUE,followers INT DEFAULT 0,following INT,CONSTRAINTS CHECK (age>=13));<br>
+        &nbsp;&nbsp;INSERT INTO user (id,age,name,email,followers,following) VALUES (1,14,"adam","adam@yahoo.in",123,145),(2,15,"bob","bob@gmail.com",200,200),(3,16,"casey","casey@gmail.com",300,306),(4,17,"donald","donald@gmail.com",200,105);(5,14,"eve","eve@yahoo.in",400,145),(6,16,"farah","farah@gmail.com",10000,1000);<br><br>
+
+        &nbsp;&nbsp;Update user set followers=600 where age=16; <br>
+        &nbsp;&nbsp;Select * from user;<br>
+
+        output=>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>id</th>
+                <th>age</th>
+                <th>name</th>
+                <th>email</th>
+                <th>followers</th>
+                <th>following</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>14</td>
+                <td>adam</td>
+                <td>adam@yahoo.in</td>
+                <td>123</td>
+                <td>145</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>15</td>
+                <td>bob</td>
+                <td>bob@gmail.com</td>
+                <td>200</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>16</td>
+                <td>casey</td>
+                <td>casey@email.com</td>
+                <td>600</td>
+                <td>306</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>17</td>
+                <td>donald</td>
+                <td>donald@gmail.com</td>
+                <td>200</td>
+                <td>105</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>14</td>
+                <td>eve</td>
+                <td>eve@yahoo.in</td>
+                <td>400</td>
+                <td>145</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>16</td>
+                <td>farah</td>
+                <td>farah@gmail.com</td>
+                <td>600</td>
+                <td>1000</td>
+            </tr>
+        </table>
+    </p>
+
+    <h3>3)Delete Table :</h3>
+    <p>
+        The DELETE statement is used to delete the existing records in a table. <br>
+        <b>Syntax :</b> DELETE FROM table_name WHERE condition; <br>
+
+        <!-- Ex18 -->
+        &nbsp;<b>Ex18</b> <br>
+        &nbsp;&nbsp;CREATE DATABASE instagram;<br>
+        &nbsp;&nbsp;USE instagram;<br>
+        &nbsp;&nbsp;CREATE TABLE user(id INT PRIMARY KEY,age INT,name VARCHAR(30) NOT NULL,email VARCHAR(50) UNIQUE,followers INT DEFAULT 0,following INT,CONSTRAINTS CHECK (age>=13));<br>
+        &nbsp;&nbsp;INSERT INTO user (id,age,name,email,followers,following) VALUES (1,14,"adam","adam@yahoo.in",123,145),(2,15,"bob","bob@gmail.com",200,200),(3,16,"casey","casey@gmail.com",300,306),(4,17,"donald","donald@gmail.com",200,105);(5,14,"eve","eve@yahoo.in",400,145),(6,16,"farah","farah@gmail.com",10000,1000);<br><br>
+
+        &nbsp;&nbsp;Delete from user where age=14; <br>
+        &nbsp;&nbsp;select * from user;<br>
+
+        output=>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>id</th>
+                <th>age</th>
+                <th>name</th>
+                <th>email</th>
+                <th>followers</th>
+                <th>following</th>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>15</td>
+                <td>bob</td>
+                <td>bob@gmail.com</td>
+                <td>200</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>16</td>
+                <td>casey</td>
+                <td>casey@email.com</td>
+                <td>300</td>
+                <td>306</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>17</td>
+                <td>donald</td>
+                <td>donald@gmail.com</td>
+                <td>200</td>
+                <td>105</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>16</td>
+                <td>farah</td>
+                <td>farah@gmail.com</td>
+                <td>10000</td>
+                <td>1000</td>
+            </tr>
+        </table><br>
+
+        &nbsp;&nbsp;Delete from user;<br>
+        &nbsp;&nbsp;select * from user;<br>
+
+        output=>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>id</th>
+                <th>age</th>
+                <th>name</th>
+                <th>email</th>
+                <th>followers</th>
+                <th>following</th>
+            </tr>
+        </table>
+    </p><br>
+
+    <h3>5)ALTER Table :</h3>
+    <p>
+        The ALTER TABLE statement is used to add, delete, or modify columns in an existing table.<br>
+        The ALTER TABLE statement is also used to add and drop various constraints on an existing table.<br><br>
+
+        <b>i)ADD Column :</b> To add a new column in a table. <br>
+        <b>Syntax :</b> ALTER TABLE table_name ADD COLUMN column-name datatype [constraints];<br>
+
+         <!-- Ex19 -->
+         &nbsp;<b>Ex19</b> <br>
+         &nbsp;&nbsp;CREATE DATABASE instagram;<br>
+         &nbsp;&nbsp;USE instagram;<br>
+         &nbsp;&nbsp;CREATE TABLE user(id INT PRIMARY KEY,age INT,name VARCHAR(30) NOT NULL,email VARCHAR(50) UNIQUE,followers INT DEFAULT 0,following INT,CONSTRAINTS CHECK (age>=13));<br>
+         &nbsp;&nbsp;INSERT INTO user (id,age,name,email,followers,following) VALUES (1,14,"adam","adam@yahoo.in",123,145),(2,15,"bob","bob@gmail.com",200,200),(3,16,"casey","casey@gmail.com",300,306),(4,17,"donald","donald@gmail.com",200,105);(5,14,"eve","eve@yahoo.in",400,145),(6,16,"farah","farah@gmail.com",10000,1000);<br><br>
+ 
+         &nbsp;&nbsp;ALTER TABLE user ADD COLUMN city VARCHAR(25) DEFAULT "Delhi"; <br><br>
+         &nbsp;&nbsp;select name,city from user;<br>
+
+         output=>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>name</th>
+                <th>email</th>
+            </tr>
+            <tr>
+                <td>adam</td>
+                <td>Delhi</td>
+            </tr>
+            <tr>
+                <td>bob</td>
+                <td>Delhi</td>
+            </tr>
+            <tr>
+                <td>casey</td>
+                <td>Delhi</td>
+            </tr>
+            <tr>
+                <td>donald</td>
+                <td>Delhi</td>
+            </tr>
+            <tr>
+                <td>eve</td>
+                <td>Delhi</td>
+            </tr>
+            <tr>
+                <td>farah</td>
+                <td>Delhi</td>
+            </tr>
+        </table><br>
+
+        <b>ii)DROP Column :</b> To delete a column in a table. <br>
+        <b>Syntax :</b> ALTER TABLE table_name DROP COLUMN column-name;<br>
+
+         <!-- Ex20 -->
+         &nbsp;<b>Ex20</b> <br>
+         &nbsp;&nbsp;CREATE DATABASE instagram;<br>
+         &nbsp;&nbsp;USE instagram;<br>
+         &nbsp;&nbsp;CREATE TABLE user(id INT PRIMARY KEY,age INT,name VARCHAR(30) NOT NULL,email VARCHAR(50) UNIQUE,followers INT DEFAULT 0,following INT,CONSTRAINTS CHECK (age>=13));<br>
+         &nbsp;&nbsp;INSERT INTO user (id,age,name,email,followers,following) VALUES (1,14,"adam","adam@yahoo.in",123,145),(2,15,"bob","bob@gmail.com",200,200),(3,16,"casey","casey@gmail.com",300,306),(4,17,"donald","donald@gmail.com",200,105);(5,14,"eve","eve@yahoo.in",400,145),(6,16,"farah","farah@gmail.com",10000,1000);<br><br>
+ 
+         &nbsp;&nbsp;ALTER TABLE user DROP COLUMN age; <br><br>
+         &nbsp;&nbsp;select * from user;<br>
+
+        output=>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>email</th>
+                <th>followers</th>
+                <th>following</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>adam</td>
+                <td>adam@yahoo.in</td>
+                <td>123</td>
+                <td>145</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>bob</td>
+                <td>bob@gmail.com</td>
+                <td>200</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>casey</td>
+                <td>casey@email.com</td>
+                <td>300</td>
+                <td>306</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>donald</td>
+                <td>donald@gmail.com</td>
+                <td>200</td>
+                <td>105</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>eve</td>
+                <td>eve@yahoo.in</td>
+                <td>400</td>
+                <td>145</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>farah</td>
+                <td>farah@gmail.com</td>
+                <td>10000</td>
+                <td>1000</td>
+            </tr>
+        </table><br>
+
+        <b>iii)RENAME Table :</b> To rename the table name. <br>
+        <b>Syntax :</b> ALTER TABLE table_name RENAME TO new_table_name;<br>
+
+         <!-- Ex21 -->
+         &nbsp;<b>Ex21</b> <br>
+         &nbsp;&nbsp;CREATE DATABASE instagram;<br>
+         &nbsp;&nbsp;USE instagram;<br>
+         &nbsp;&nbsp;CREATE TABLE user(id INT PRIMARY KEY,age INT,name VARCHAR(30) NOT NULL,email VARCHAR(50) UNIQUE,followers INT DEFAULT 0,following INT,CONSTRAINTS CHECK (age>=13));<br>
+         &nbsp;&nbsp;INSERT INTO user (id,age,name,email,followers,following) VALUES (1,14,"adam","adam@yahoo.in",123,145),(2,15,"bob","bob@gmail.com",200,200),(3,16,"casey","casey@gmail.com",300,306),(4,17,"donald","donald@gmail.com",200,105);(5,14,"eve","eve@yahoo.in",400,145),(6,16,"farah","farah@gmail.com",10000,1000);<br><br>
+ 
+         &nbsp;&nbsp;ALTER TABLE user RENAME TO instaUser; <br><br>
+         &nbsp;&nbsp;select * from instaUser;<br>
+
+        output=>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>id</th>
+                <th>age</th>
+                <th>name</th>
+                <th>email</th>
+                <th>followers</th>
+                <th>following</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>14</td>
+                <td>adam</td>
+                <td>adam@yahoo.in</td>
+                <td>123</td>
+                <td>145</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>15</td>
+                <td>bob</td>
+                <td>bob@gmail.com</td>
+                <td>200</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>16</td>
+                <td>casey</td>
+                <td>casey@email.com</td>
+                <td>300</td>
+                <td>306</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>17</td>
+                <td>donald</td>
+                <td>donald@gmail.com</td>
+                <td>200</td>
+                <td>105</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>14</td>
+                <td>eve</td>
+                <td>eve@yahoo.in</td>
+                <td>400</td>
+                <td>145</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>16</td>
+                <td>farah</td>
+                <td>farah@gmail.com</td>
+                <td>10000</td>
+                <td>1000</td>
+            </tr>
+        </table><br>
+
+        <b>iv)CHANGE Column :</b> To rename the old_column_name to new_column_name. <br>
+        <b>Syntax :</b> ALTER TABLE table_name CHANGE COLUMN old_column_name new_column_name new_column_name_datatype [new_column_name_constraints];<br>
+
+         <!-- Ex22 -->
+         &nbsp;<b>Ex22</b> <br>
+         &nbsp;&nbsp;CREATE DATABASE instagram;<br>
+         &nbsp;&nbsp;USE instagram;<br>
+         &nbsp;&nbsp;CREATE TABLE user(id INT PRIMARY KEY,age INT,name VARCHAR(30) NOT NULL,email VARCHAR(50) UNIQUE,followers INT DEFAULT 0,following INT,CONSTRAINTS CHECK (age>=13));<br>
+         &nbsp;&nbsp;INSERT INTO user (id,age,name,email,followers,following) VALUES (1,14,"adam","adam@yahoo.in",123,145),(2,15,"bob","bob@gmail.com",200,200),(3,16,"casey","casey@gmail.com",300,306),(4,17,"donald","donald@gmail.com",200,105);(5,14,"eve","eve@yahoo.in",400,145),(6,16,"farah","farah@gmail.com",10000,1000);<br><br>
+ 
+         &nbsp;&nbsp;ALTER TABLE user CHANGE COLUMN followers subs INT DEFAULT 0; <br><br>
+         &nbsp;&nbsp;select * from  user;<br>
+
+        output=>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>id</th>
+                <th>age</th>
+                <th>name</th>
+                <th>email</th>
+                <th>subs</th>
+                <th>following</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>14</td>
+                <td>adam</td>
+                <td>adam@yahoo.in</td>
+                <td>123</td>
+                <td>145</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>15</td>
+                <td>bob</td>
+                <td>bob@gmail.com</td>
+                <td>200</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>16</td>
+                <td>casey</td>
+                <td>casey@email.com</td>
+                <td>300</td>
+                <td>306</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>17</td>
+                <td>donald</td>
+                <td>donald@gmail.com</td>
+                <td>200</td>
+                <td>105</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>14</td>
+                <td>eve</td>
+                <td>eve@yahoo.in</td>
+                <td>400</td>
+                <td>145</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>16</td>
+                <td>farah</td>
+                <td>farah@gmail.com</td>
+                <td>10000</td>
+                <td>1000</td>
+            </tr>
+        </table><br>
+
+        <b>v)MODIFY Column :</b> To change the datatype or constraint of the table. <br>
+        <b>Syntax :</b> ALTER TABLE table_name MODIFY col_name new_datatype [new_constraint];<br>
+
+         <!-- Ex23 -->
+         &nbsp;<b>Ex23</b> <br>
+         &nbsp;&nbsp;CREATE DATABASE instagram;<br>
+         &nbsp;&nbsp;USE instagram;<br>
+         &nbsp;&nbsp;CREATE TABLE user(id INT PRIMARY KEY,age INT,name VARCHAR(30) NOT NULL,email VARCHAR(50) UNIQUE,followers INT DEFAULT 0,following INT,CONSTRAINTS CHECK (age>=13));<br>
+         &nbsp;&nbsp;INSERT INTO user (id,age,name,email,followers,following) VALUES (1,14,"adam","adam@yahoo.in",123,145),(2,15,"bob","bob@gmail.com",200,200),(3,16,"casey","casey@gmail.com",300,306),(4,17,"donald","donald@gmail.com",200,105);(5,14,"eve","eve@yahoo.in",400,145),(6,16,"farah","farah@gmail.com",10000,1000);<br><br>
+ 
+         &nbsp;&nbsp;ALTER TABLE user MODIFY followers INT DEFAULT 5; <br><br>
+
+         &nbsp;&nbsp;INSERT INTO user (id,age,name,email,following) VALUES (11,20,"adams","adams@yahoo.in",154); <br>
+         &nbsp;&nbsp;select * from  user;<br>
+
+        output=>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>id</th>
+                <th>age</th>
+                <th>name</th>
+                <th>email</th>
+                <th>followers</th>
+                <th>following</th>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>20</td>
+                <td>adams</td>
+                <td>adams@yahoo.in</td>
+                <td>5</td>
+                <td>154</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>14</td>
+                <td>adam</td>
+                <td>adam@yahoo.in</td>
+                <td>123</td>
+                <td>145</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>15</td>
+                <td>bob</td>
+                <td>bob@gmail.com</td>
+                <td>200</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>16</td>
+                <td>casey</td>
+                <td>casey@email.com</td>
+                <td>300</td>
+                <td>306</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>17</td>
+                <td>donald</td>
+                <td>donald@gmail.com</td>
+                <td>200</td>
+                <td>105</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>14</td>
+                <td>eve</td>
+                <td>eve@yahoo.in</td>
+                <td>400</td>
+                <td>145</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>16</td>
+                <td>farah</td>
+                <td>farah@gmail.com</td>
+                <td>10000</td>
+                <td>1000</td>
+            </tr>
+        </table>
+    </p><br>
+
+    <h3>6)TRUNCATE Table :</h3>
+    <p>
+        The TRUNCATE TABLE command deletes the data inside a table, but not the table itself.<br>
+        <b>Syntax :</b> TRUNCATE TABLE table_name;<br><br>
+
+        <!-- Ex24 -->
+        &nbsp;<b>Ex24</b> <br>
+        &nbsp;&nbsp;CREATE DATABASE instagram;<br>
+        &nbsp;&nbsp;USE instagram;<br>
+        &nbsp;&nbsp;CREATE TABLE user(id INT PRIMARY KEY,age INT,name VARCHAR(30) NOT NULL,email VARCHAR(50) UNIQUE,followers INT DEFAULT 0,following INT,CONSTRAINTS CHECK (age>=13));<br>
+        &nbsp;&nbsp;INSERT INTO user (id,age,name,email,followers,following) VALUES (1,14,"adam","adam@yahoo.in",123,145),(2,15,"bob","bob@gmail.com",200,200),(3,16,"casey","casey@gmail.com",300,306),(4,17,"donald","donald@gmail.com",200,105);(5,14,"eve","eve@yahoo.in",400,145),(6,16,"farah","farah@gmail.com",10000,1000);<br><br>
+
+        &nbsp;&nbsp;TRUNCATE TABLE user; <br><br>
+        &nbsp;&nbsp;select * from  user;<br>
+
+       output=>
+       <table border="1" cellspacing="0">
+           <tr>
+               <th>id</th>
+               <th>age</th>
+               <th>name</th>
+               <th>email</th>
+               <th>followers</th>
+               <th>following</th>
+           </tr>
+           <tr>
+               <td>NULL</td>
+               <td>NULL</td>
+               <td>NULL</td>
+               <td>NULL</td>
+               <td>NULL</td>
+               <td>NULL</td>
+           </tr>
+       </table>
+    </p><br>
+
+    <h3>7)DROP Table :</h3>
+    <p>
+        The DROP TABLE command deletes a table in the database.<br>
+        <b>Syntax :</b> DROP TABLE table_name;<br><br>
+
+        <!-- Ex25 -->
+        &nbsp;<b>Ex25</b> <br>
+        &nbsp;&nbsp;CREATE DATABASE instagram;<br>
+        &nbsp;&nbsp;USE instagram;<br>
+        &nbsp;&nbsp;CREATE TABLE user(id INT PRIMARY KEY,age INT,name VARCHAR(30) NOT NULL,email VARCHAR(50) UNIQUE,followers INT DEFAULT 0,following INT,CONSTRAINTS CHECK (age>=13));<br>
+        &nbsp;&nbsp;INSERT INTO user (id,age,name,email,followers,following) VALUES (1,14,"adam","adam@yahoo.in",123,145),(2,15,"bob","bob@gmail.com",200,200),(3,16,"casey","casey@gmail.com",300,306),(4,17,"donald","donald@gmail.com",200,105);(5,14,"eve","eve@yahoo.in",400,145),(6,16,"farah","farah@gmail.com",10000,1000);<br><br>
+
+        &nbsp;&nbsp;DROP TABLE user; <br><br>
+        &nbsp;&nbsp;SHOW TABLES;<br>
+
+       output=>
+       <table border="1" cellspacing="0">
+           <tr>
+               <th>Table</th>
+           </tr>
+           <tr>
+               <td>NULL</td>
+           </tr>
+       </table>
+    </p>
+
+
+</body>
+</html>
