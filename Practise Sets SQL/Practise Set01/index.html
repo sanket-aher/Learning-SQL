@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practise Set01</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h3>
+        Q.Create a database for your college.Create a table named teacher to store (id,name,subject,salary). <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;Insert following data in the table : <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;23,"ajay","math",50000 <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;47,"bharat","english",60000 <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;18,"chetan","chemistry",45000 <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;9,"divya","physics",75000 <br>
+        1)Select tecahers whose salary is more than 55k? <br>
+        2)Rename the salary column of teacher table to ctc? <br>
+        3)Update salary of all teachers by giving them an increment of 25%? <br>
+        4)Add a new column for teachers called city.The default city should be 'Gurgaon'? <br>
+        5)Delete the salary/ctc column for teacher table?
+    </h3>
+
+    <div>
+        <b>SOls =></b><br><br>
+        CREATE DATABASE IF NOT EXISTS college; <br>
+        USE college; <br><br>
+        CREATE TABLE teacher(id INT PRIMARY KEY,name VARCHAR(50),subject VARCHAR(50),salary INT); <br><br>
+        INSERT INTO teacher(id,name,subject,salary) <br>
+        VALUES <br>
+        (23,"ajay","math",50000), <br>
+        (47,"bharat","english",60000), <br>
+        (18,"chetan","chemistry",45000), <br>
+        (9,"divya","physics",75000); <br><br>
+
+        <b>1st Sol =></b><br>
+        SELECT * FROM teacher WHERE salary > 55000;<br>
+        output=> 
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>subject</th>
+                <th>salary</th>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>divya</td>
+                <td>physics</td>
+                <td>75000</td>
+            </tr>
+            <tr>
+                <td>47</td>
+                <td>bharat</td>
+                <td>english</td>
+                <td>60000</td>
+            </tr>
+        </table><br>
+
+        <b>2nd Sol =></b><br>
+        ALTER TABLE teacher CHANGE COLUMN salary ctc INT;<br><br>
+        SELECT * FROM teacher;<br>
+        output=> 
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>subject</th>
+                <th>ctc</th>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>divya</td>
+                <td>physics</td>
+                <td>75000</td>
+            </tr>
+            <tr>
+                <td>18</td>
+                <td>chetan</td>
+                <td>chemistry</td>
+                <td>45000</td>
+            </tr>
+            <tr>
+                <td>23</td>
+                <td>ajay</td>
+                <td>math</td>
+                <td>50000</td>
+            </tr>
+            <tr>
+                <td>47</td>
+                <td>bharat</td>
+                <td>english</td>
+                <td>60000</td>
+            </tr>
+        </table><br>
+
+        <b>3rd Sol =></b><br>
+        SET SQL_SAFE_UPDATES=0;<br>
+        UPDATE teacher SET ctc=ctc+ctc*0.25;<br><br>
+        SELECT * FROM teacher;<br>
+        output=> 
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>subject</th>
+                <th>ctc</th>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>divya</td>
+                <td>physics</td>
+                <td>93750</td>
+            </tr>
+            <tr>
+                <td>18</td>
+                <td>chetan</td>
+                <td>chemistry</td>
+                <td>56250</td>
+            </tr>
+            <tr>
+                <td>23</td>
+                <td>ajay</td>
+                <td>math</td>
+                <td>62500</td>
+            </tr>
+            <tr>
+                <td>47</td>
+                <td>bharat</td>
+                <td>english</td>
+                <td>75000</td>
+            </tr>
+        </table><br>
+
+        <b>4th Sol =></b><br>
+        ALTER TABLE teacher ADD COLUMN city VARCHAR(50) DEFAULT "Gurgaon";<br><br>
+        SELECT * FROM teacher;<br>
+        output=> 
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>subject</th>
+                <th>ctc</th>
+                <th>city</th>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>divya</td>
+                <td>physics</td>
+                <td>93750</td>
+                <td>Gurgaon</td>
+            </tr>
+            <tr>
+                <td>18</td>
+                <td>chetan</td>
+                <td>chemistry</td>
+                <td>56250</td>
+                <td>Gurgaon</td>
+            </tr>
+            <tr>
+                <td>23</td>
+                <td>ajay</td>
+                <td>math</td>
+                <td>62500</td>
+                <td>Gurgaon</td>
+            </tr>
+            <tr>
+                <td>47</td>
+                <td>bharat</td>
+                <td>english</td>
+                <td>75000</td>
+                <td>Gurgaon</td>
+            </tr>
+        </table><br>
+
+        <b>5th Sol =></b><br>
+        ALTER TABLE teacher DROP COLUMN ctc;<br><br>
+        SELECT * FROM teacher;<br>
+        output=> 
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>subject</th>
+                <th>city</th>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>divya</td>
+                <td>physics</td>
+                <td>Gurgaon</td>
+            </tr>
+            <tr>
+                <td>18</td>
+                <td>chetan</td>
+                <td>chemistry</td>
+                <td>Gurgaon</td>
+            </tr>
+            <tr>
+                <td>23</td>
+                <td>ajay</td>
+                <td>math</td>
+                <td>Gurgaon</td>
+            </tr>
+            <tr>
+                <td>47</td>
+                <td>bharat</td>
+                <td>english</td>
+                <td>Gurgaon</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

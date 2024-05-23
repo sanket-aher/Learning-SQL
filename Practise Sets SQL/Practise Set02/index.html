@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practise Set02</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h3>
+        Q.Create a database for your college.Create a table named student to store (rollno,name,city,marks). <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;Insert following data in the table : <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;110,"adam","Delhi",76 <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;108,"bob","Mumbai",65 <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;124,"casey","Pune",94 <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;112,"duke","Pune",80 <br>
+        1)Select all students who scored 75+? <br>
+        2)Find names of all cities where students are from? <br>
+        3)Find the maximum marks of students from each city? <br>
+        4)Find the average marks of the class? <br>
+        5)Add a new column grade , assign grade such that : <br>
+        &nbsp;&nbsp;marks > 80,grade = 0 <br>
+        &nbsp;&nbsp;marks > 70-80,grade = A <br>
+        &nbsp;&nbsp;marks > 60-70,grade = B
+    </h3>
+
+    <div>
+        <b>SOls =></b><br><br>
+        CREATE DATABASE IF NOT EXISTS college; <br>
+        USE college; <br><br>
+        CREATE TABLE student(rollno INT PRIMARY KEY,name VARCHAR(30),city VARCHAR(30),marks INT); <br><br>
+        INSERT INTO student(rollno,name,city,marks) <br>
+        VALUES <br>
+        (110,"adam","Delhi",76), <br>
+        (108,"bob","Mumbai",65), <br>
+        (124,"casey","Pune",94), <br>
+        (112,"duke","Pune",80); <br><br>
+
+        <b>1st Sol =></b><br>
+        SELECT * FROM student WHERE marks > 75;<br>
+        output=> 
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>rollno</th>
+                <th>name</th>
+                <th>city</th>
+                <th>marks</th>
+            </tr>
+            <tr>
+                <td>110</td>
+                <td>adam</td>
+                <td>Delhi</td>
+                <td>76</td>
+            </tr>
+            <tr>
+                <td>124</td>
+                <td>casey</td>
+                <td>Pune</td>
+                <td>94</td>
+            </tr>
+            <tr>
+                <td>112</td>
+                <td>duke</td>
+                <td>Pune</td>
+                <td>80</td>
+            </tr>
+        </table><br>
+
+        <b>2nd Sol =></b><br>
+        <b>Sol1=></b>SELECT DISTINCT city FROM student;<br>
+        <b>Sol2=></b>SELECT city FROM student GROUP BY city;<br><br>
+        output=> 
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>city</th>
+            </tr>
+            <tr>
+                <td>Mumbai</td>
+            </tr>
+            <tr>
+                <td>Delhi</td>
+            </tr>
+            <tr>
+                <td>Pune</td>
+            </tr>
+        </table><br>
+
+        <b>3rd Sol =></b><br>
+        SELECT max(marks),city FROM student GROUP BY city;<br>
+        output=> 
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>max(marks)</th>
+                <th>city</th>
+            </tr>
+            <tr>
+                <td>65</td>
+                <td>Mumbai</td>
+            </tr>
+            <tr>
+                <td>76</td>
+                <td>Delhi</td>
+            </tr>
+            <tr>
+                <td>94</td>
+                <td>Pune</td>
+            </tr>
+        </table><br>
+
+        <b>4th Sol =></b><br>
+        SELECT avg(marks) FROM student;<br>
+        output=> 
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>avg(marks)</th>
+            </tr>
+            <tr>
+                <td>78.7500</td>
+            </tr>
+        </table><br>
+
+        <b>5th Sol =></b><br>
+        ALTER TABLE student ADD COLUMN grade VARCHAR(2);<br><br>
+        SET SQL_SAFE_UPDATES=0;<br>
+        UPDATE student SET grade="O" WHERE marks >= 80;<br>
+        UPDATE student SET grade="A" WHERE marks >= 70 AND marks < 80;<br>
+        UPDATE student SET grade="B" WHERE marks >= 60 AND marks < 70;<br><br>
+        SELECT * FROM student;<br>
+        output=> 
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>rollno</th>
+                <th>name</th>
+                <th>city</th>
+                <th>marks</th>
+                <th>grade</th>
+            </tr>
+            <tr>
+                <td>108</td>
+                <td>bob</td>
+                <td>Mumbai</td>
+                <td>65</td>
+                <td>B</td>
+            </tr>
+            <tr>
+                <td>110</td>
+                <td>adam</td>
+                <td>Delhi</td>
+                <td>76</td>
+                <td>A</td>
+            </tr>
+            <tr>
+                <td>112</td>
+                <td>duke</td>
+                <td>Pune</td>
+                <td>80</td>
+                <td>O</td>
+            </tr>
+            <tr>
+                <td>124</td>
+                <td>cassey</td>
+                <td>Pune</td>
+                <td>94</td>
+                <td>O</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
