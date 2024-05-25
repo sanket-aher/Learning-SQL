@@ -6,9 +6,10 @@ Welcome to the Learning SQL repository! This repository is designed to help you 
 
 1. [Introduction](#introduction)
 2. [Getting Started](#getting-started)
-3. [Exercises](#exercises)
-4. [Resources](#resources)
-5. [Contributing](#contributing)
+3. [SQL Commands](#sql-commands)
+4. [Exercises](#exercises)
+5. [Resources](#resources)
+6. [Contributing](#contributing)
 
 ## Introduction
 
@@ -23,9 +24,26 @@ To get started with MySQL, you'll need to install the MySQL server and a client 
 
 After installation, you can connect to your MySQL server using MySQL Workbench or another SQL client.
 
+## SQL Commands
+
+[SQL COMMANDS](https://github.com/sanket-aher/Learning-SQL/tree/main/SQL%20COMMANDS)
+
+Here is an overview of some essential SQL commands you will use frequently:
+
+- **CREATE DATABASE:** Used to create a new database.
+- **CREATE TABLE:** Used to create a new table within a database.
+- **INSERT INTO:** Used to add new rows of data to a table.
+- **SELECT:** Used to retrieve data from one or more tables.
+- **UPDATE:** Used to modify existing data within a table.
+- **DELETE:** Used to remove data from a table.
+- **ALTER TABLE:** Used to modify the structure of an existing table (e.g., adding or deleting columns).
+- **DROP TABLE:** Used to delete a table and all of its data.
+
 ## Exercises
+ [Practise Sets SQL](https://github.com/sanket-aher/Learning-SQL/tree/main/Practise%20Sets%20SQL)
 
 Practice Sets your SQL skills with these exercises:
+
 
 - **Basic Queries Practise Set**
 - **Intermediate Queries Practise Set**
