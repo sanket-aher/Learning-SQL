@@ -1,0 +1,12 @@
+h3{
+    line-height: 0rem;
+}
+
+div{
+    font-size: 1.2rem;
+}
+
+.divflex{
+    display: flex;
+    gap: 10px;
+}

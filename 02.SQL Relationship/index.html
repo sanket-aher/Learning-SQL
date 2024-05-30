@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Relationship</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>SQL Relationship</h1><br>
+    <h3> <a href="https://www.geeksforgeeks.org/relationships-in-sql-one-to-one-one-to-many-many-to-many/" target="_blank">Reference of topic</a> </h3><br><br>
+
+    <h3>What is Relationship?</h3>
+    <div>Relationships in SQL tables define how tables are connected to one another.<br>
+       Relationships in SQL refer to the associations or connections between tables in a relational database.  
+    </div><br>
+
+    <h3>Types of Relationship?</h3>
+    <div>1)one-to-one<br>
+       2)one-to-many<br>
+       3)many-to-many<br>
+       4)self-referencing<br>  
+    </div><br>
+
+    <h3>1]One-to-One Relationship :</h3>
+    <div>
+        Each record in Table A is associated with one and only one record in Table B, and vice versa. <br><br>
+
+        <b>Ex</b> <br>
+        CREATE TABLE users ( <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; user_id INT PRIMARY KEY, <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; username VARCHAR(50) <br>
+        ); <br>
+        CREATE TABLE user_profiles ( <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; profile_id INT PRIMARY KEY, <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; user_id INT UNIQUE, <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; profile_data VARCHAR(255), <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; FOREIGN KEY (user_id) REFERENCES users(user_id) <br>
+        ); <br><br>
+
+        INSERT INTO users(user_id,username) <br>
+        VALUES <br>
+        (1,'ramesh'), <br>
+        (2,'riya');<br><br>
+
+        INSERT INTO user_profiles(profile_id,profile_data,user_id) <br>
+        VALUES <br>
+        (11,'xyz',1), <br>
+        (12,'abc',2), <br>
+        (13,'gfg',null); <br><br>
+
+        <div class="divflex">
+            <table border="1" cellspacing="0">
+                <caption>users(Table A)</caption>
+                <tr>
+                    <th>user_id</th>
+                    <th>username</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>ramesh</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>riya</td>
+                </tr>
+            </table><br>
+
+            <table border="1" cellspacing="0">
+                <caption>user_profiles(Table B)</caption>
+                <tr>
+                    <th>profile_id</th>
+                    <th>profile_data</th>
+                    <th>user_id</th>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>xyz</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>abc</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td>gfg</td>
+                    <td>null</td>
+                </tr>
+            </table><br>
+        </div>
+    </div> <br>
+
+    <h3>2]One-to-Many Relationship :</h3>
+    <div>
+        Each record in Table A can be associated with multiple records in Table B, but each record in Table B is associated with only one record in Table A. <br><br>
+    
+        <b>Ex</b> <br>
+        CREATE TABLE departments ( <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; department_id INT PRIMARY KEY, <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; department_name VARCHAR(50) <br>
+        ); <br>
+        CREATE TABLE employees ( <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; employee_id INT PRIMARY KEY, <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; employee_name VARCHAR(50), <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; department_id INT, <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; FOREIGN KEY (department_id) REFERENCES departments(department_id) <br>
+        ); <br><br>
+
+        INSERT INTO departments(department_id,department_name) <br>
+        VALUES <br>
+        (1,'techical'), <br>
+        (2,'accounts'), <br>
+        (3,'pr');<br><br>
+
+        INSERT INTO employees(employee_id,employee_name,department_id) <br>
+        VALUES <br>
+        (11,'Ramesh',3), <br>
+        (12,'Riya',1), <br>
+        (13,'Neha',2), <br>
+        (14,'Mayank',1); <br><br>
+
+        <div class="divflex">
+            <table border="1" cellspacing="0">
+                <caption>departments(Table A)</caption>
+                <tr>
+                    <th>department_id</th>
+                    <th>department_name</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>techical</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>accounts</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>pr</td>
+                </tr>
+            </table><br>
+
+            <table border="1" cellspacing="0">
+                <caption>employees(Table B)</caption>
+                <tr>
+                    <th>employee_id</th>
+                    <th>employee_name</th>
+                    <th>department_id</th>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>Ramesh</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>Riya</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td>Neha</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td>Mayank</td>
+                    <td>1</td>
+                </tr>
+            </table><br>
+        </div>
+    </div><br>
+
+    <h3>3]Many-to-Many Relationship :</h3>
+    <div>
+        Each record in Table A can be associated with multiple records in Table B, and vice versa. <br>
+        Create an intermediate table (also known as a junction or linking table) that contains foreign keys referencing both related tables. <br><br>
+    
+        <b>Ex</b> <br>
+        CREATE TABLE students ( <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; student_id INT PRIMARY KEY, <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; student_name VARCHAR(50) <br>
+        ); <br>
+        CREATE TABLE courses ( <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; course_id INT PRIMARY KEY, <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; course_name VARCHAR(50) <br>
+        ); <br>
+        CREATE TABLE student_courses ( <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; student_id INT, <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; course_id INT, <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; FOREIGN KEY (student_id) REFERENCES students(student_id), <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; FOREIGN KEY (course_id) REFERENCES courses(course_id) <br>
+        ); <br><br>
+
+        INSERT INTO students(student_id,student_name) <br>
+        VALUES <br>
+        (1,'Alice'), <br>
+        (2,'Bob'), <br>
+        (3,'Charlie');<br><br>
+
+        INSERT INTO courses(course_id,course_name) <br>
+        VALUES <br>
+        (101,'Maths'), <br>
+        (102,'History'), <br>
+        (103,'Computer'); <br><br>
+
+        INSERT INTO student_courses(student_id,course_id) <br>
+        VALUES <br>
+        (1,101), <br>
+        (1,102), <br>
+        (2,102); <br><br>
+
+        <div class="divflex">
+            <table border="1" cellspacing="0">
+                <caption>students(Table A)</caption>
+                <tr>
+                    <th>student_id</th>
+                    <th>student_name</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Alice</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Bob</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Charlie</td>
+                </tr>
+            </table><br>
+
+            <table border="1" cellspacing="0">
+                <caption>courses(Table B)</caption>
+                <tr>
+                    <th>course_id</th>
+                    <th>course_name</th>
+                </tr>
+                <tr>
+                    <td>101</td>
+                    <td>Maths</td>
+                </tr>
+                <tr>
+                    <td>102</td>
+                    <td>History</td>
+                </tr>
+                <tr>
+                    <td>103</td>
+                    <td>Computer</td>
+                </tr>
+            </table><br>
+
+            <table border="1" cellspacing="0">
+                <caption>student_courses(intermediate)</caption>
+                <tr>
+                    <th>student_id</th>
+                    <th>course_id</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>101</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>102</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>102</td>
+                </tr>
+            </table><br>
+        </div>
+    </div><br>
+
+    <h3>4]Self-Referencing Relationship :</h3>
+    <div>
+        A table has a foreign key that references its primary key. <br>
+        Include a foreign key column in the same table that references its primary key. <br><br>
+    
+        <b>Ex</b> <br>
+        CREATE TABLE employeesRecord ( <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; employee_id INT PRIMARY KEY, <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; employee_name VARCHAR(50), <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; manager_id INT, <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; FOREIGN KEY (manager_id) REFERENCES employeesRecord(employee_id) <br>
+        ); <br><br>
+
+        INSERT INTO employeesRecord(employee_id,employee_name,manager_id) <br>
+        VALUES <br>
+        (1,'Alice',null), <br>
+        (2,'Bob',1), <br>
+        (3,'Charlie',1);<br><br>
+
+        <table border="1" cellspacing="0">
+            <caption>employeesRecord(Table)</caption>
+            <tr>
+                <th>employee_id</th>
+                <th>employee_name</th>
+                <th>manager_id</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Alice</td>
+                <td>null</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Bob</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Charlie</td>
+                <td>1</td>
+            </tr>
+        </table><br>
+    </div><br>
+
+
+
+
+</body>
+</html>
