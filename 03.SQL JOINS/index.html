@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL JOINS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>SQL JOIN</h1><br>
+
+    <h3>What is SQL JOIN?</h3>
+    <div>
+        A JOIN clause is used to combine rows from two or more tables, based on a related column between them.
+    </div><br>
+
+    <h3>Comman Example Query:</h3>
+    <div>
+        CREATE TABLE student ( <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; student_id INT PRIMARY KEY, <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; name VARCHAR(50) <br>
+        ); <br>
+        CREATE TABLE course ( <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; student_id INT UNIQUE, <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; course VARCHAR(50) <br>
+        ); <br><br>
+
+        INSERT INTO student(student_id,name) <br>
+        VALUES <br>
+        (101,'adam'), <br>
+        (102,'bob'), <br>
+        (103,'casey');<br><br>
+
+        INSERT INTO course(student_id,course) <br>
+        VALUES <br>
+        (102,'english'), <br>
+        (105,'math'), <br>
+        (103,'science'), <br>
+        (107,'computer'); <br><br>
+
+        select * from student;<br>
+        select * from course;<br><br>
+
+        <div class="divflex">
+            <table border="1" cellspacing="0">
+                <caption>student(left table)</caption>
+                <tr>
+                    <th>student_id</th>
+                    <th>name</th>
+                </tr>
+                <tr>
+                    <td>101</td>
+                    <td>adam</td>
+                </tr>
+                <tr>
+                    <td>102</td>
+                    <td>bob</td>
+                </tr>
+                <tr>
+                    <td>103</td>
+                    <td>casey</td>
+                </tr>
+            </table><br>
+
+            <table border="1" cellspacing="0">
+                <caption>course(right table)</caption>
+                <tr>
+                    <th>student_id</th>
+                    <th>course</th>
+                </tr>
+                <tr>
+                    <td>102</td>
+                    <td>english</td>
+                </tr>
+                <tr>
+                    <td>105</td>
+                    <td>math</td>
+                </tr>
+                <tr>
+                    <td>103</td>
+                    <td>science</td>
+                </tr>
+                <tr>
+                    <td>107</td>
+                    <td>computer</td>
+                </tr>
+            </table><br>
+        </div>
+    </div><br><br>
+
+    <h3>Note : It is not necessary for tables to be connected/relationship(1-1/1-M/M-M) through a primary key - foreign key relationship to perform SQL JOIN operations.</h3><br><br>
+
+
+    <h3>Different Types of SQL JOINS</h3><br>
+
+    <h3>1]INNER JOIN/JOIN :</h3>
+    <div>
+        Returns records that have matching values in both tables.
+        <div>
+            <img src="https://www.tutorialrepublic.com/lib/images/inner-join.png" alt="inner join" width="400px">
+        </div>
+        <b>Syntax :</b>SELECT column(s) FROM table1 <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INNER JOIN table2 <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ON table1.colname=table2.colname; <br><br>
+
+        <b>Ex1</b> <br>
+        select * from student as s <br>
+        inner join course as c <br>
+        on s.student_id = c.student_id;<br><br>
+
+        <table border="1" cellspacing="0">
+            <caption>Result</caption>
+            <tr>
+                <th>student_id</th>
+                <th>name</th>
+                <th>student_id</th>
+                <th>course</th>
+            </tr>
+            <tr>
+                <td>102</td>
+                <td>bob</td>
+                <td>102</td>
+                <td>english</td>
+            </tr>
+            <tr>
+                <td>103</td>
+                <td>casey</td>
+                <td>103</td>
+                <td>science</td>
+            </tr>
+        </table><br>
+    </div><br>
+
+    <h3>2]LEFT JOIN/LEFT OUTER JOIN :</h3>
+    <div>
+        Returns all records from the left table, and the matched records from the right table.
+        <div>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCxDnnSaXiA2OzIui3z1OvS5Wyas2cICFF3A&s" alt="left join" width="300px">
+        </div>
+        <b>Syntax :</b>SELECT column(s) FROM table1 <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LEFT JOIN table2 <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ON table1.colname=table2.colname; <br><br>
+
+        <b>Ex2</b> <br>
+        select * from student as s <br>
+        left join course as c <br>
+        on s.student_id = c.student_id;<br><br>
+
+        <table border="1" cellspacing="0">
+            <caption>Result</caption>
+            <tr>
+                <th>student_id</th>
+                <th>name</th>
+                <th>student_id</th>
+                <th>course</th>
+            </tr>
+            <tr>
+                <td>101</td>
+                <td>adam</td>
+                <td>null</td>
+                <td>null</td>
+            </tr>
+            <tr>
+                <td>102</td>
+                <td>bob</td>
+                <td>102</td>
+                <td>english</td>
+            </tr>
+            <tr>
+                <td>103</td>
+                <td>casey</td>
+                <td>103</td>
+                <td>science</td>
+            </tr>
+        </table><br>
+    </div><br>
+
+    <h3>3]RIGHT JOIN/RIGHT OUTER JOIN :</h3>
+    <div>
+        Returns all records from the right table, and the matched records from the left table.
+        <div>
+            <img src="https://www.tutorialrepublic.com/lib/images/right-join.png" alt="right join" width="400px">
+        </div>
+        <b>Syntax :</b>SELECT column(s) FROM table1 <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RIGHT JOIN table2 <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ON table1.colname=table2.colname; <br><br>
+
+        <b>Ex3</b> <br>
+        select * from student as s <br>
+        right join course as c <br>
+        on s.student_id = c.student_id;<br><br>
+
+        <table border="1" cellspacing="0">
+            <caption>Result</caption>
+            <tr>
+                <th>student_id</th>
+                <th>name</th>
+                <th>student_id</th>
+                <th>course</th>
+            </tr>
+            <tr>
+                <td>102</td>
+                <td>bob</td>
+                <td>102</td>
+                <td>english</td>
+            </tr>
+            <tr>
+                <td>103</td>
+                <td>casey</td>
+                <td>103</td>
+                <td>science</td>
+            </tr>
+            <tr>
+                <td>null</td>
+                <td>null</td>
+                <td>105</td>
+                <td>math</td>
+            </tr>
+            <tr>
+                <td>null</td>
+                <td>null</td>
+                <td>107</td>
+                <td>computer</td>
+            </tr>
+        </table><br>
+    </div><br>
+    
+    <h3>4]FULL JOIN/FULL OUTER JOIN :</h3>
+    <div>
+        Returns all records when there is a match in either left or right table. <br>
+        <div>
+            <img src="https://www.tutorialrepublic.com/lib/images/full-join.png" alt="full join" width="400px">
+        </div>
+        <b>Syntax :</b>SELECT column(s) FROM table1 <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LEFT JOIN table2 <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ON table1.colname=table2.colname <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; UNION <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SELECT column(s) FROM table1 <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RIGHT JOIN table2 <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ON table1.colname=table2.colname; <br><br>
+
+        <b>Note :</b>In MYSQL ,there is no command called FULL JOIN ,so use UNION instead of them. <br><br>
+
+        <b>Ex4</b> <br>
+        select * from student as s <br>
+        left join course as c <br>
+        on s.student_id = c.student_id<br>
+        union <br>
+        select * from student as s <br>
+        right join course as c <br>
+        on s.student_id = c.student_id;<br><br>
+
+        <table border="1" cellspacing="0">
+            <caption>Result</caption>
+            <tr>
+                <th>student_id</th>
+                <th>name</th>
+                <th>student_id</th>
+                <th>course</th>
+            </tr>
+            <tr>
+                <td>101</td>
+                <td>adam</td>
+                <td>null</td>
+                <td>null</td>
+            </tr>
+            <tr>
+                <td>102</td>
+                <td>bob</td>
+                <td>102</td>
+                <td>english</td>
+            </tr>
+            <tr>
+                <td>103</td>
+                <td>casey</td>
+                <td>103</td>
+                <td>science</td>
+            </tr>
+            <tr>
+                <td>null</td>
+                <td>null</td>
+                <td>105</td>
+                <td>math</td>
+            </tr>
+            <tr>
+                <td>null</td>
+                <td>null</td>
+                <td>107</td>
+                <td>computer</td>
+            </tr>
+        </table><br>
+    </div>
+
+    <h3>5]LEFT EXCLUSIVE JOIN :</h3>
+    <div>
+        Returns all records from the left table, and remove the matched records from the right table.
+        <div>
+            <img src="./assets/image1.png" alt="left exclusive join" width="200px">
+        </div>
+        <b>Syntax :</b>SELECT column(s) FROM table1 <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LEFT JOIN table2 <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ON table1.colname=table2.colname <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; WHERE table2.colname IS NULL; <br><br>
+
+        <b>Ex5</b> <br>
+        select * from student as s <br>
+        left join course as c <br>
+        on s.student_id = c.student_id;<br>
+        where c.student_id is null;<br><br>
+
+        <table border="1" cellspacing="0">
+            <caption>Result</caption>
+            <tr>
+                <th>student_id</th>
+                <th>name</th>
+                <th>student_id</th>
+                <th>course</th>
+            </tr>
+            <tr>
+                <td>101</td>
+                <td>adam</td>
+                <td>null</td>
+                <td>null</td>
+            </tr>
+        </table><br>
+    </div><br>
+
+    <h3>6]RIGHT EXCLUSIVE JOIN :</h3>
+    <div>
+        Returns all records from the right table, and remove the matched records from the left table.
+        <div>
+            <img src="./assets/image2.png" alt="right exclusive join" width="200px">
+        </div>
+        <b>Syntax :</b>SELECT column(s) FROM table1 <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RIGHT JOIN table2 <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ON table1.colname=table2.colname <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; WHERE table1.colname IS NULL; <br><br>
+
+        <b>Ex6</b> <br>
+        select * from student as s <br>
+        right join course as c <br>
+        on s.student_id = c.student_id;<br>
+        where s.student_id is null;<br><br>
+
+        <table border="1" cellspacing="0">
+            <caption>Result</caption>
+            <tr>
+                <th>student_id</th>
+                <th>name</th>
+                <th>student_id</th>
+                <th>course</th>
+            </tr>
+            <tr>
+                <td>null</td>
+                <td>null</td>
+                <td>105</td>
+                <td>math</td>
+            </tr>
+            <tr>
+                <td>null</td>
+                <td>null</td>
+                <td>107</td>
+                <td>computer</td>
+            </tr>
+        </table><br>
+    </div><br>
+
+    <h3>7]FULL EXCLUSIVE JOIN :</h3>
+    <div>
+        Returns all records from left and right table but remove the matched records from the left and right table. <br>
+        <div>
+            <img src="./assets/image3.png" alt="full exclusive join" width="200px">
+        </div>
+        <b>Syntax :</b>SELECT column(s) FROM table1 <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LEFT JOIN table2 <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ON table1.colname=table2.colname <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; WHERE table2.colname IS NULL <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; UNION <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SELECT column(s) FROM table1 <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RIGHT JOIN table2 <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ON table1.colname=table2.colname <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; WHERE table1.colname IS NULL; <br><br>
+
+        <b>Ex7</b> <br>
+        select * from student as s <br>
+        left join course as c <br>
+        on s.student_id = c.student_id<br>
+        where c.student_id is null<br>
+        union <br>
+        select * from student as s <br>
+        right join course as c <br>
+        on s.student_id = c.student_id<br>
+        where s.student_id is null;<br><br>
+
+        <table border="1" cellspacing="0">
+            <caption>Result</caption>
+            <tr>
+                <th>student_id</th>
+                <th>name</th>
+                <th>student_id</th>
+                <th>course</th>
+            </tr>
+            <tr>
+                <td>101</td>
+                <td>adam</td>
+                <td>null</td>
+                <td>null</td>
+            </tr>
+            <tr>
+                <td>null</td>
+                <td>null</td>
+                <td>105</td>
+                <td>math</td>
+            </tr>
+            <tr>
+                <td>null</td>
+                <td>null</td>
+                <td>107</td>
+                <td>computer</td>
+            </tr>
+        </table><br>
+    </div><br>
+
+    <h3>8]SELF JOIN :</h3>
+    <div>
+        It is a regular join,but the table is joined with itself. <br>
+        <b>Syntax :</b>SELECT column(s) FROM table as a <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; JOIN table as b <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ON a.colname=b.colname; <br><br>
+
+        <b>Ex8</b> <br>
+        CREATE TABLE employee ( <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; id INT PRIMARY KEY, <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; name VARCHAR(50), <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; manager_id INT <br>
+        ); <br><br>
+
+        INSERT INTO employee(id,name,manager_id) <br>
+        VALUES <br>
+        (101,'adam',103), <br>
+        (102,'bob',104), <br>
+        (103,'casey',null),<br>
+        (104,'donald',103);<br><br>
+
+        select * from employee;<br><br>
+
+        <table border="1" cellspacing="0">
+            <caption>employee</caption>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>manager_id</th>
+            </tr>
+            <tr>
+                <td>101</td>
+                <td>adam</td>
+                <td>103</td>
+            </tr>
+            <tr>
+                <td>102</td>
+                <td>bob</td>
+                <td>104</td>
+            </tr>
+            <tr>
+                <td>103</td>
+                <td>casey</td>
+                <td>null</td>
+            </tr>
+            <tr>
+                <td>104</td>
+                <td>donald</td>
+                <td>103</td>
+            </tr>
+        </table><br>
+
+        select a.name as manager_name,b.name <br>
+        from employee as a <br>
+        join employee as b <br>
+        on a.id = b.manager_id; <br><br>
+
+        <table border="1" cellspacing="0">
+            <caption>Result</caption>
+            <tr>
+                <th>manager_name</th>
+                <th>name</th>
+            </tr>
+            <tr>
+                <td>casey</td>
+                <td>adam</td>
+            </tr>
+            <tr>
+                <td>donald</td>
+                <td>bob</td>
+            </tr>
+            <tr>
+                <td>casey</td>
+                <td>donald</td>
+            </tr>
+        </table><br>
+
+
+    </div>
+
+</body>
+</html>
