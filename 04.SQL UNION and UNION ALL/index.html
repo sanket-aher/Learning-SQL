@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNION and UNION ALL</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>SQL UNION and UNION ALL</h1><br>
+    <h3> <a href="https://www.geeksforgeeks.org/union-vs-union-all-in-sql/" target="_blank">Reference of topic</a> </h3><br><br>
+
+    <h3>UNION </h3>
+    <div>
+        UNION Operator in SQL is used to combine the set of two or more SELECT statements as the resulting. <br>
+        The UNION operator removes duplicates from the combined result from the set of SELECT statements.
+    </div><br>
+
+    <h3>UNION ALL</h3>
+    <div>
+        UNION ALL Operator in SQL is also used to combine the set of two or more SELECT statements as the resulting. <br>
+        The UNION ALL operator has duplicates values from the combined result from the set of SELECT statements.
+    </div><br>
+
+    <div>
+        <b>Note :</b> To use UNION,UNION ALL : <br>
+        1)every SELECT should have same number of columns. <br>
+        2)columns must have similar datatypes. <br>
+        3)columns in every SELECT should be in same order.
+    </div><br><br>
+
+    <h3>Comman Example Query:</h3>
+    <div>
+        CREATE TABLE customer ( <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; customer_id INT PRIMARY KEY, <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; customerName VARCHAR(50), <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; Age INT <br>
+        ); <br><br>
+
+        INSERT INTO customer(customer_id,customerName,Age) <br>
+        VALUES <br>
+        (1,'Shubham',23), <br>
+        (2,'Aman',21), <br>
+        (3,'Riya',22), <br>
+        (4,'Rahul',22), <br>
+        (5,'Mayank',22), <br>
+        (6,'Ankit',22); <br><br>
+
+        select * from customer;<br><br>
+
+        <table border="1" cellspacing="0">
+            <caption>customer</caption>
+            <tr>
+                <th>customer_id</th>
+                <th>customerName</th>
+                <th>Age</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Shubham</td>
+                <td>23</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Aman</td>
+                <td>21</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Riya</td>
+                <td>22</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Rahul</td>
+                <td>22</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Mayank</td>
+                <td>22</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Ankit</td>
+                <td>22</td>
+            </tr>
+        </table><br>
+    </div><br>
+
+    <h3>Examples of UNION Operator</h3><br>
+    <div>
+        <b>Example 1:</b> Twice Fetch and Combine Record for employees whose CustomerID lie between 1 and 4. <br><br>
+        select * from customer <br>
+        where customer_id between 1 and 4 <br>
+        UNION <br>
+        select * from customer <br>
+        where customer_id between 1 and 4; <br><br>
+
+        <table border="1" cellspacing="0">
+            <caption>Result</caption>
+            <tr>
+                <th>customer_id</th>
+                <th>customerName</th>
+                <th>Age</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Shubham</td>
+                <td>23</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Aman</td>
+                <td>21</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Riya</td>
+                <td>22</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Rahul</td>
+                <td>22</td>
+            </tr>
+        </table><br>
+
+        <b>Example 2:</b> Fetch and Combine Record for Employees Whose CustomerID lie between 1 to 4 and 3 to 6. <br><br>
+        select * from customer <br>
+        where customer_id between 1 and 4 <br>
+        UNION <br>
+        select * from customer <br>
+        where customer_id between 3 and 6; <br><br>
+
+        <table border="1" cellspacing="0">
+            <caption>Result</caption>
+            <tr>
+                <th>customer_id</th>
+                <th>customerName</th>
+                <th>Age</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Shubham</td>
+                <td>23</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Aman</td>
+                <td>21</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Riya</td>
+                <td>22</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Rahul</td>
+                <td>22</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Mayank</td>
+                <td>22</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Ankit</td>
+                <td>22</td>
+            </tr>
+        </table><br>
+    </div><br>
+
+
+    <h3>Examples of UNION ALL Operator</h3><br>
+    <div>
+        <b>Example 1:</b> Twice Fetch and Combine Record for employees whose CustomerID lie between 1 and 4. <br><br>
+        select * from customer <br>
+        where customer_id between 1 and 4 <br>
+        UNION ALL<br>
+        select * from customer <br>
+        where customer_id between 1 and 4; <br><br>
+
+        <table border="1" cellspacing="0">
+            <caption>Result</caption>
+            <tr>
+                <th>customer_id</th>
+                <th>customerName</th>
+                <th>Age</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Shubham</td>
+                <td>23</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Aman</td>
+                <td>21</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Riya</td>
+                <td>22</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Rahul</td>
+                <td>22</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Shubham</td>
+                <td>23</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Aman</td>
+                <td>21</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Riya</td>
+                <td>22</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Rahul</td>
+                <td>22</td>
+            </tr>
+        </table><br>
+
+        <b>Example 2:</b> Fetch and Combine Record for Employees Whose CustomerID lie between 1 to 4 and 3 to 6. <br><br>
+        select * from customer <br>
+        where customer_id between 1 and 4 <br>
+        UNION ALL <br>
+        select * from customer <br>
+        where customer_id between 3 and 6; <br><br>
+
+        <table border="1" cellspacing="0">
+            <caption>Result</caption>
+            <tr>
+                <th>customer_id</th>
+                <th>customerName</th>
+                <th>Age</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Shubham</td>
+                <td>23</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Aman</td>
+                <td>21</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Riya</td>
+                <td>22</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Rahul</td>
+                <td>22</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Riya</td>
+                <td>22</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Rahul</td>
+                <td>22</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Mayank</td>
+                <td>22</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Ankit</td>
+                <td>22</td>
+            </tr>
+        </table><br>
+    </div><br>
+
+    <h3>Difference between UNION and UNION ALL </h3>
+    <div>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>UNION</th>
+                <th>UNION ALL</th>
+            </tr>
+            <tr>
+                <td>The UNION removes duplicate rows from the result set,<br> it contains unique records.</td>
+                <td>The UNION ALL remains all rows, including duplicates <br> without any elimination.</td>
+            </tr>
+        </table>
+    </div><br>
+
+</body>
+</html>
