@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Sub Queries</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h3>SQL Sub Queries</h3>
+    <div>
+        A Sub query or Inner query or Nested query is a query within another SQL query. <br>
+        It involves two or more select statements. <br><br>
+
+        <b>Sub-queries can be written in</b><br>
+        1)where <br>
+        2)from <br>
+        3)select <br>
+    </div><br>
+
+    <h3>Comman Example Query:</h3>
+    <div>
+        CREATE TABLE student ( <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; rollno INT PRIMARY KEY, <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; name VARCHAR(50), <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; marks INT, <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; city VARCHAR(50) <br>
+        ); <br><br>
+
+        INSERT INTO student(rollno,name,marks,city) <br>
+        VALUES <br>
+        (101,'anil',78,'Pune'), <br>
+        (102,'bhumika',93,'Mumbai'), <br>
+        (103,'chetan',85,'Mumbai'), <br>
+        (104,'dhruv',96,'Delhi'), <br>
+        (105,'emanuel',92,'Delhi'), <br>     
+        (106,'farah',82,'Delhi'); <br><br>     
+
+        select * from student; <br><br>
+
+        <table border="1" cellspacing="0">
+            <caption>student</caption>
+            <tr>
+                <th>rollno</th>
+                <th>name</th>
+                <th>marks</th>
+                <th>city</th>
+            </tr>
+            <tr>
+                <td>101</td>
+                <td>anil</td>
+                <td>78</td>
+                <td>Pune</td>
+            </tr>
+            <tr>
+                <td>102</td>
+                <td>bhumika</td>
+                <td>93</td>
+                <td>Mumbai</td>
+            </tr>
+            <tr>
+                <td>103</td>
+                <td>chetan</td>
+                <td>85</td>
+                <td>Mumbai</td>
+            </tr>
+            <tr>
+                <td>104</td>
+                <td>dhruv</td>
+                <td>96</td>
+                <td>Delhi</td>
+            </tr>
+            <tr>
+                <td>105</td>
+                <td>emanue1</td>
+                <td>92</td>
+                <td>Delhi</td>
+            </tr>
+            <tr>
+                <td>106</td>
+                <td>farah</td>
+                <td>82</td>
+                <td>Delhi</td>
+            </tr>
+        </table><br>
+
+    </div><br>
+
+    <h3>1]where</h3>
+    <div>
+        <b>syntax :</b><br>
+        SELECT column(s) <br>
+        FROM table_name <br>
+        WHERE col_name operator (subquery); <br><br>
+
+        <b>Ex 1 : Get names of all students who scored more than class average.</b><br>
+        Step1 :Find the avg of class. <br>
+        Step2 :Find the names of students with marks>avg. <br><br>
+
+        select name,marks from student <br>
+        where marks > (select avg(marks) from student); <br><br>
+
+        <table border="1" cellspacing="0">
+            <caption>Result</caption>
+            <tr>
+                <th>name</th>
+                <th>marks</th>
+            </tr>
+            <tr>
+                <td>bhumika</td>
+                <td>93</td>
+            </tr>
+            <tr>
+                <td>dhruv</td>
+                <td>96</td>
+            </tr>
+            <tr>
+                <td>emanuel</td>
+                <td>92</td>
+            </tr>
+        </table><br>
+
+        <b>Ex 2 : Find the names of all students with even roll numbers.</b><br>
+        Step1 :Find the even roll numbers. <br>
+        Step2 :Find the names of students with even roll numbers. <br><br>
+
+        select name,rollno from student <br>
+        where rollno IN (select rollno from student where rollno % 2 = 0); <br><br>
+
+        <table border="1" cellspacing="0">
+            <caption>Result</caption>
+            <tr>
+                <th>name</th>
+                <th>rollno</th>
+            </tr>
+            <tr>
+                <td>bhumika</td>
+                <td>102</td>
+            </tr>
+            <tr>
+                <td>dhruv</td>
+                <td>104</td>
+            </tr>
+            <tr>
+                <td>farah</td>
+                <td>106</td>
+            </tr>
+        </table><br>
+    </div><br>
+
+    <h3>2]from</h3>
+    <div>
+        <b>syntax :</b><br>
+        SELECT column(s) <br>
+        FROM (subquery); <br><br>
+
+        <b>Ex 1 : Find the max marks from the students of Delhi.</b><br>
+        Step1 :Find the students of Delhi. <br>
+        Step2 :Find their max marks using the sublist in step1. <br><br>
+
+        select max(marks) <br>
+        from (select * from student where city="Delhi") As temp; <br><br>
+
+        <table border="1" cellspacing="0">
+            <caption>Result</caption>
+            <tr>
+                <th>max(marks)</th>
+            </tr>
+            <tr>
+                <td>96</td>
+            </tr>
+        </table><br>
+
+    </div><br>
+
+    <h3>2]select</h3>
+    <div>
+        <b>syntax :</b><br>
+        SELECT (subquery),column(s) <br>
+        FROM tablename; <br><br>
+
+        <b>Ex 1 : </b><br>
+        select (select max(marks) from student) as st,name <br>
+        from student; <br><br>
+
+        <table border="1" cellspacing="0">
+            <caption>Result</caption>
+            <tr>
+                <th>st</th>
+                <th>name</th>
+            </tr>
+            <tr>
+                <td>96</td>
+                <td>anil</td>
+            </tr>
+            <tr>
+                <td>96</td>
+                <td>bhumika</td>
+            </tr>
+            <tr>
+                <td>96</td>
+                <td>chetan</td>
+            </tr>
+            <tr>
+                <td>96</td>
+                <td>dhruv</td>
+            </tr>
+            <tr>
+                <td>96</td>
+                <td>emanuel</td>
+            </tr>
+            <tr>
+                <td>96</td>
+                <td>farah</td>
+            </tr>
+        </table><br>
+
+    </div><br>
+
+
+</body>
+</html>
