@@ -66,7 +66,7 @@ SQL is a standard programming language specifically designed for managing and ma
 ## Additional Resources
 
 In this repository, you will find:
-- [index.html](https://github.com/sanket-aher/Learning-SQL/blob/main/SQL%20COMMANDS/index.html): A file containing all the information about SQL. You can download it and run it in your browser by double-clicking on the file.
+- [index.html](https://github.com/sanket-aher/Learning-SQL/blob/main/SQL%20COMMANDS/index.html): A file containing all the information about SQL Commands. You can download it and run it in your browser by double-clicking on the file to view the content.
 - [sqlExamples.sql](https://github.com/sanket-aher/Learning-SQL/blob/main/SQL%20COMMANDS/sqlExample.sql): A file with SQL command examples that you can run in your MySQL Workbench to practice your SQL skills.
 
 Happy learning!
