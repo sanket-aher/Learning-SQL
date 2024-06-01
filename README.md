@@ -30,7 +30,7 @@ After installation, you can connect to your MySQL server using MySQL Workbench o
 
 ## SQL Commands
 
-[SQL COMMANDS](https://github.com/sanket-aher/Learning-SQL/tree/main/SQL%20COMMANDS)
+[SQL COMMANDS](https://github.com/sanket-aher/Learning-SQL/tree/main/01.SQL%20COMMANDS)
 
 Here is an overview of some essential SQL commands you will use frequently:
 
